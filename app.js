@@ -5,11 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
-const userRoute = require('./routes/users.route');
-const brandRoute = require('./routes/brands.route');
-const woodRoute = require('./routes/woods.route');
-const productRoute = require('./routes/products.route');
-const siteRoute = require('./routes/site.route');
+const noteRoute = require('./routes/notes.route');
 
 const errorHandler = require('./_helpers/error-handler')
 const fatalErrorHandler = require('./_helpers/fatal-error-handler')
@@ -36,7 +32,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/api', [userRoute, brandRoute, woodRoute, productRoute, siteRoute]);
+app.use('/api', [noteRoute]);
 
 app.use((err, req, res, next) => {
     debug(`Error: ${err.message}`)
