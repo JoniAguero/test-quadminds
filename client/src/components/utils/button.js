@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
+import Fab from '@material-ui/core/Fab';
 
 const styles = theme => ({
     button: {
@@ -20,13 +21,18 @@ const Buttons = (props) => {
     switch(props.type){
         case "delete":
             template = <IconButton color="secondary" className={classes.button} aria-label="delete">
-                            <Icon>delete</Icon>
+                            <Icon className="note-icon">delete</Icon>
                         </IconButton>
         break;
         case "edit":
             template = <IconButton className={classes.button} aria-label="delete">
-                            <Icon>edit</Icon>
+                            <Icon className="note-icon">edit</Icon>
                         </IconButton>
+        break;
+        case "new":
+            template = <Fab color="secondary" aria-label="Add" className={classes.margin}>
+                            <Icon>add</Icon>
+                        </Fab>
         break;
         default:
             template='';

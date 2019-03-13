@@ -28,6 +28,13 @@ body {
   height: auto;
 }
 
+.title-notes {
+  display: flex;
+  border-bottom: 1px solid #757575;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* NOTE */ 
 
 .container-note {
@@ -66,6 +73,10 @@ body {
 
 @media (max-width: 767px) {
 
+  .h3-notes {
+    font-size: 2.7em !important;
+  }
+
   .container-home {
     margin-left: 2.5%;
     width: 95%;
@@ -78,5 +89,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+
+  .h3-notes {
+    font-size: 2em !important;
+  }
+
+  .note-icon {
+    font-size: .8em !important;
   }
 }
