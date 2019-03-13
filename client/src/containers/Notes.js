@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getNotes } from '../actions/notes_actions';
+import Note from '../components/Note';
 
 class Notes extends Component {
 
@@ -12,19 +13,25 @@ class Notes extends Component {
     }
 
     componentDidMount = () => {
-      this.props.dispatch(getNotes()).then(response => {
-        console.log(response);
+      this.props.dispatch(getNotes()).then(notes => {
         this.setState({
-          notes: response
+          notes: notes.payload
         })
       })
     }
+
+    showNotes = notes => (
+      notes.map((note) =>
+        <Note
+          note={note}
+          key={note._id} />)
+    )
     
 
   render() {
     return (
-      <div>
-        notes
+      <div className="container-notes">
+        {this.state.notes.length > 0 ? this.showNotes(this.state.notes) : <p>cargando</p>}
       </div>
     )
   }

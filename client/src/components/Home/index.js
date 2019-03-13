@@ -6,7 +6,6 @@ export class Home extends Component {
     return (
       <div className="container">
         <div className="container-home">
-          home
           <Notes />
         </div>
       </div>
