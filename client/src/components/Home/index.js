@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import Notes from '../../containers/Notes';
 
 export class Home extends Component {
   render() {
     return (
-      <div>
-        home
+      <div className="container">
+        <div className="container-home">
+          home
+          <Notes />
+        </div>
       </div>
     )
   }

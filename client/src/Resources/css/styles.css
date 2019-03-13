@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER */
+
+.header {
+    width: 100%;
+    height: 50px;
+    background-color: rgb(113, 113, 161);
+    position: fixed;
+}
+
+/* HOME */
+
+.container-home {
+  margin-left: 10%;
+  width: 80%;
+  margin-top: 50px;
+}
+
+/* FOOTER */
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(113, 113, 161);
+  color: white;
+  text-align: center;
+}

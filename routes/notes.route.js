@@ -8,8 +8,8 @@ var NoteController = require('../controllers/notes.controller');
 
 var noteRoute = express.Router();
 
-noteRoute.post('/note', NoteController.CreateNote);
+noteRoute.get('/notes/all', NoteController.GetNotes);
+noteRoute.post('/notes/new', NoteController.CreateNote);
 // brandRoute.post('/product/brand', [auth, admin], BrandController.CreateBrand);
-noteRoute.get('/notes', NoteController.GetNotes);
 
 module.exports = noteRoute;

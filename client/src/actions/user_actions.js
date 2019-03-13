@@ -35,7 +35,8 @@ export function loginUser(dataToSubmit) {
 }
 
 export function auth() {
-
+    console.log('action user');
+    
     const request = axios.get(`${USER_SERVER}/auth`)
         .then(response => response.data);
 
