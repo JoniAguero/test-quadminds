@@ -10,7 +10,7 @@ const Note = ({note}) => {
         <Paper note={note}/>
       </div>
       <div className="container-note-buttons">
-        <Button type="edit"/>
+        <Button type="edit"/> 
         <Button type="delete"/>
       </div>
     </div>
