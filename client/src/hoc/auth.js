@@ -12,6 +12,8 @@ export default function(ComposedClass,reload,adminRoute = null){
 
         componentDidMount(){
             this.props.dispatch(auth()).then(response =>{
+                console.log(response);
+                
                 let user = this.props.user.userData;
 
                 if(!user.isAuth){
@@ -54,5 +56,3 @@ export default function(ComposedClass,reload,adminRoute = null){
 
     return connect(mapStateToProps)(AuthenticationCheck)
 }
-
-

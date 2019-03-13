@@ -44,6 +44,8 @@ const UserLogout = (req, res) => {
 
 const UserAuth = (req, res) => {
 
+    console.log(res);
+
     res.status(200).json({
         isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
@@ -60,3 +62,4 @@ module.exports = {
     UserLogout,
     UserAuth
 }
+    
