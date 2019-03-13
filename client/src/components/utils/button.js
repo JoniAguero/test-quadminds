@@ -17,10 +17,11 @@ const styles = theme => ({
 const Buttons = (props) => {
     const { classes } = props;
     let template = '';
-    console.log(classes);
     switch(props.type){
         case "delete":
-            template = <IconButton color="secondary" className={classes.button} aria-label="delete">
+            template = <IconButton color="secondary" className={classes.button} aria-label="delete" onClick={()=>{
+                            props.runAction();
+                        }}>
                             <Icon className="note-icon">delete</Icon>
                         </IconButton>
         break;
@@ -30,7 +31,9 @@ const Buttons = (props) => {
                         </IconButton>
         break;
         case "new":
-            template = <Fab color="secondary" aria-label="Add" className={classes.margin}>
+            template = <Fab color="secondary" aria-label="Add" className={classes.margin} onClick={()=>{
+                            props.runAction();
+                        }}>
                             <Icon>add</Icon>
                         </Fab>
         break;

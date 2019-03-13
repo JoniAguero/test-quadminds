@@ -6,7 +6,8 @@ import {
 } from '../actions/types';
  
 
-export default function(state={},action){
+export default function(state={}, action){
+    console.log(action);
     switch(action.type){
         case REGISTER_USER:
             return {...state, register: action.payload }

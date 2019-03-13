@@ -1,11 +1,15 @@
 import {
-    SET_NOTES
+    SET_NOTES, NEW_NOTE
 } from '../actions/types';
  
 
-export default function(state={},action){
+export default function(state={}, action){
+    console.log(action);
+
     switch(action.type){
         case SET_NOTES:
+            return {...state, notes: action.payload }
+        case NEW_NOTE:
             return {...state, notes: action.payload }
         default:
             return state;

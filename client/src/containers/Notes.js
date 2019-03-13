@@ -4,43 +4,46 @@ import { connect } from 'react-redux';
 import { getNotes } from '../actions/notes_actions';
 import Note from '../components/Note';
 import Button from '../components/utils/button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Notes extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            notes: []
-        };
-    }
+  componentDidMount = () => {
+    this.props.dispatch(getNotes());
+  }
 
-    componentDidMount = () => {
-      this.props.dispatch(getNotes()).then(notes => {
-        this.setState({
-          notes: notes.payload
-        })
-      })
-    }
-
-    showNotes = notes => (
-      notes.map((note) =>
-        <Note
-          note={note}
-          key={note._id} />)
-    )
+  showNotes = notes => (
+    notes.map((note) =>
+      <Note
+        note={note}
+        key={note._id} />)
+  )
     
 
   render() {
+    const { notes, user } = this.props;
+    const arrayNotes = notes.notes;
+    const userInfo = user.userData;
+    
     return (
       <div>
         <div className="title-notes">
           <Typography component="h2" variant="display3" gutterBottom className="h3-notes">
             Listado de notas
           </Typography>
-          <Button type="new"/> 
+          <Button type="new"
+                  runAction = {
+                    () => {
+                      userInfo.isAuth ?
+                      console.log('jeje'): console.log('jaja');
+                    }
+                  }/>
         </div>
         <div className="container-notes">
-          {this.state.notes.length > 0 ? this.showNotes(this.state.notes) : <p>cargando</p>}
+          {
+            arrayNotes && arrayNotes.length > 0 ? this.showNotes(arrayNotes) : < div className = "main_loader" >
+                        <CircularProgress style={{color:'#2196F3'}} thickness={7}/> 
+                    </div>}
         </div>
       </div>
     )
@@ -49,6 +52,7 @@ class Notes extends Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     notes: state.notes
   }
 }
