@@ -17,7 +17,6 @@ body {
 .container-home {
   margin-left: 10%;
   width: 80%;
-  background-color: yellow; 
   padding: 5px 5px;
   padding-top: 70px;
 }
@@ -25,13 +24,27 @@ body {
 /* NOTES */
 
 .container-notes {
-  background-color: red;
+  width: 100%;
+  height: auto;
 }
 
 /* NOTE */ 
 
 .container-note {
-  background-color: lightskyblue;
+  display: flex;
+  margin-top: 10px;
+}
+
+.container-note-paper {
+  width: 80%;
+  height: auto;
+}
+
+.container-note-buttons {
+  width: 20%;
+  height: auto;
+  display: flex;
+  justify-content: center;
 }
 
 /* FOOTER */
