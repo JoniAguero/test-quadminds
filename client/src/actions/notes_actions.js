@@ -40,9 +40,9 @@ export function clearNoteDetail() {
     }
 }
 
-export function newNote() {
+export function newNote(datatoSubmit) {
 
-    const request = axios.post(`${NOTES_SERVER}/new`)
+    const request = axios.post(`${NOTES_SERVER}/new`, datatoSubmit)
         .then(response => response.data);
 
     return {

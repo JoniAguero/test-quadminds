@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header>
       <div className="header">
-        header
+        QUADMINS TEST
       </div>
     </header>
   )

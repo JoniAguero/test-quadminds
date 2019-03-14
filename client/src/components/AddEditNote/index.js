@@ -2,54 +2,78 @@ import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
 import AddEditNoteForm from '../utils/form';
 import { connect } from 'react-redux';
-import { getNoteById, clearNoteDetail } from '../../actions/notes_actions';
+import { getNoteById, clearNoteDetail, newNote } from '../../actions/notes_actions';
 
 export class AddEditNote extends Component {
 
+  state = {
+    note: {
+      _id: undefined,
+      title: '',
+      content: ''
+    },
+    type: 'new'
+  }
+
   componentDidMount() {
     const id = this.props.match.params.id;
-    this.props.dispatch(getNoteById(id)).then(() => {
-      if (!this.props.notes.notes) {
-        this.props.history.push('/');
-      }
-    })
+    if(id !== undefined) {
+      this.props.dispatch(getNoteById(id)).then(note => {
+        this.setState({
+          note: note.payload[0],
+          type: 'edit'
+        })
+      })
+    }
   }
 
   componentWillUnmount() {
     this.props.dispatch(clearNoteDetail())
+    this.setState({
+      note: {
+        _id: undefined,
+        title: '',
+        content: ''
+      },
+      type: 'new'
+    })
   }
 
   submit = values => {
-    console.log(values)
+    console.log(values);
+    if(this.state.type === 'new') {
+      this.props.dispatch(newNote(values))
+      this.props.history.push("/");
+    } else {
+      console.log('edit');
+    }
   }
 
   render() {
 
-    const id = this.props.match.params.id
-    const type = id === undefined ? 'new' : 'edit';
+    const renderTitle = (name) => {
+      return (
+        <div className="title-form-note">
+          <Typography component="h2" variant="display2" gutterBottom>
+            {name}
+          </Typography>
+        </div>
+      )
+    }
 
     const renderForm = () => {
-      if(type === 'new') {
+      if(this.state.type === 'new') {
         return (
           <div className="form-note">
-            <div className="title-form-note">
-              <Typography component="h2" variant="display2" gutterBottom>
-                New Note
-              </Typography>
-            </div>
-            <AddEditNoteForm onSubmit={this.submit}/>
+            {renderTitle('New Note')}
+            <AddEditNoteForm onSubmit={this.submit} />
           </div>
         )
       } else {
-        const note = this.props.notes;
         return (
           <div className="form-note">
-            <div className="title-form-note">
-              <Typography component="h2" variant="display2" gutterBottom>
-                Edit Note
-              </Typography>
-            </div>
-            <AddEditNoteForm onSubmit={this.submit} note={note}/>
+            {renderTitle('Edit Note')}
+            <AddEditNoteForm onSubmit={this.submit} />
           </div>
         )
       }
