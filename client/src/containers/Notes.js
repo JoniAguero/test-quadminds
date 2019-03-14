@@ -21,9 +21,8 @@ class Notes extends Component {
     
 
   render() {
-    const { notes, user } = this.props;
+    const { notes } = this.props;
     const arrayNotes = notes.notes;
-    const userInfo = user.userData;
     
     return (
       <div>
@@ -31,13 +30,7 @@ class Notes extends Component {
           <Typography component="h2" variant="display3" gutterBottom className="h3-notes">
             Listado de notas
           </Typography>
-          <Button type="new"
-                  runAction = {
-                    () => {
-                      userInfo.isAuth ?
-                      console.log('jeje'): console.log('jaja');
-                    }
-                  }/>
+          <Button type="new" linkTo={`/notes/new`}></Button>
         </div>
         <div className="container-notes">
           {

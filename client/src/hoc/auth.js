@@ -6,11 +6,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 export default function(ComposedClass,reload,adminRoute = null){
     class AuthenticationCheck extends Component {
 
+        _isMounted = false;
+
         state = {
             loading: true
         }
 
         componentDidMount(){
+            this._isMounted = true;
             this.props.dispatch(auth()).then(() =>{
                 let user = this.props.user.userData;
 
@@ -29,6 +32,10 @@ export default function(ComposedClass,reload,adminRoute = null){
                 }
                 this.setState({loading:false})
             })
+        }
+
+        componentWillUnmount() {
+            this._isMounted = false;
         }
 
 

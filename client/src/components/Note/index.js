@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import Button from '../utils/button';
 import Paper from '../utils/paper';
 import DialogNote from '../utils/dialog';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { show } from 'redux-modal'
 
 class Note extends Component {
 
-  noteModalRef = ({handleClickOpen}) => {
-    this.showModal = handleClickOpen;
-  }
-
-  onNoteClick = () => {
-    this.showModal();
-  }
+  handleOpen = name => () => {
+    this.props.show(name, { message: `This is a ${name} modal` })
+  };
 
   render() {
     return (
@@ -23,11 +22,15 @@ class Note extends Component {
       <div className="container-note-buttons">
         <Button type="edit"/> 
         <Button type="delete" 
-          runAction = {() => this.onNoteClick()}
+          runAction = {this.handleOpen('note-modal')}
           />
       </div>
     </div>
     )
   }
 }
-export default Note
+
+export default connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(Note)

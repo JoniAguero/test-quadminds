@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,30 +8,31 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
+import { connectModal } from 'redux-modal'
+
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
 class NoteDialog extends React.Component {
-  state = {
-    open: false,
+  static propTypes = {
+    message: PropTypes.string.isRequired,
+    handleHide: PropTypes.func.isRequired
   };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
+  handleDelete = () => {
+    this.props.handleHide();
   };
 
   render() {
+    const { show, handleHide, message } = this.props;
+    
     return (
       <Dialog
-        open={this.state.open}
+        open={show}
         TransitionComponent={Transition}
         keepMounted
-        onClose={this.handleClose}
+        onClose={handleHide}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
@@ -39,14 +41,14 @@ class NoteDialog extends React.Component {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Si acepta, no hay vuelta atrás. Se elminará para siempre :( !
+            {message}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.handleClose} color="primary">
+          <Button onClick={handleHide} color="primary">
             Cancelar
           </Button>
-          <Button onClick={this.handleClose} color="secondary">
+          <Button onClick={this.handleDelete} color="secondary">
             Eliminar
           </Button>
         </DialogActions>
@@ -55,4 +57,4 @@ class NoteDialog extends React.Component {
   }
 }
 
-export default NoteDialog;
+export default connectModal({ name: 'note-modal' })(NoteDialog)

@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import Fab from '@material-ui/core/Fab';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     button: {
@@ -31,11 +32,11 @@ const Buttons = (props) => {
                         </IconButton>
         break;
         case "new":
-            template = <Fab color="secondary" aria-label="Add" className={classes.margin} onClick={()=>{
-                            props.runAction();
-                        }}>
-                            <Icon>add</Icon>
-                        </Fab>
+            template = <Link to={props.linkTo} className="link">
+                            <Fab color="secondary" aria-label="Add" className={classes.margin}>
+                                <Icon>add</Icon>
+                            </Fab>
+                        </Link>
         break;
         default:
             template='';
