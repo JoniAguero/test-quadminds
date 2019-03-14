@@ -9,6 +9,7 @@ var NoteController = require('../controllers/notes.controller');
 var noteRoute = express.Router();
 
 noteRoute.get('/notes/all', NoteController.GetNotes);
+noteRoute.get('/notes/by_id', NoteController.GetNotesById);
 noteRoute.post('/notes/new', NoteController.CreateNote);
 // brandRoute.post('/product/brand', [auth, admin], BrandController.CreateBrand);
 

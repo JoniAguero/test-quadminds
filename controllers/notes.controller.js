@@ -19,6 +19,25 @@ const GetNotes = (req, res) => {
     })
 }
 
+const GetNotesById = (req, res) => {
+    let type = req.query.type;
+    let items = req.query.id;
+
+    if(type === "array"){
+        let ids = req.query.id.split(',');
+        items = [];
+        items = ids.map(item=>{
+            return mongoose.Types.ObjectId(item)
+        })
+    }
+
+    Note.
+        find({ '_id':{$in:items}}).
+        exec((err,docs)=>{
+            return res.status(200).send(docs)
+    })
+}
+
 const UpdateNote= (req, res) => {
     Note.findOneAndUpdate({
             name: 'Note'
@@ -45,5 +64,6 @@ const UpdateNote= (req, res) => {
 module.exports = {
     CreateNote,
     GetNotes,
+    GetNotesById,
     UpdateNote
 }

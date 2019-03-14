@@ -1,8 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import TextField from '@material-ui/core/TextField';
-
-
 import Button from '../utils/button';
 
 const AddEditNoteForm = props => {
@@ -47,7 +45,9 @@ const AddEditNoteForm = props => {
               rows={5}
             />
           </div>
-          <Button type="submit" />
+          <div>
+            <Button type="submit" />
+          </div>
         </form>
       )
     }
