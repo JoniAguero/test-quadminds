@@ -44,8 +44,6 @@ const UserLogout = (req, res) => {
 
 const UserAuth = (req, res) => {
 
-    console.log(req);
-
     res.status(200).json({
         isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,

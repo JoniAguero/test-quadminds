@@ -5,12 +5,12 @@ import Button from '../utils/button';
 
 const AddEditNoteForm = props => {
 
-    const { handleSubmit } = props
+    const { handleSubmit, note } = props
+    console.log(note);
 
     const renderTextField = ({
       input,
       label,
-      meta: { touched, error },
       ...custom
     }) => (
       <TextField

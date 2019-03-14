@@ -1,8 +1,23 @@
 import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
 import AddEditNoteForm from '../utils/form';
+import { connect } from 'react-redux';
+import { getNoteById, clearNoteDetail } from '../../actions/notes_actions';
 
 export class AddEditNote extends Component {
+
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    this.props.dispatch(getNoteById(id)).then(() => {
+      if (!this.props.notes.notes) {
+        this.props.history.push('/');
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearNoteDetail())
+  }
 
   submit = values => {
     console.log(values)
@@ -13,31 +28,44 @@ export class AddEditNote extends Component {
     const id = this.props.match.params.id
     const type = id === undefined ? 'new' : 'edit';
 
-    const renderTitle = () => {
+    const renderForm = () => {
       if(type === 'new') {
         return (
-          <Typography component="h2" variant="display2" gutterBottom>
-            New Note
-          </Typography>
+          <div className="form-note">
+            <div className="title-form-note">
+              <Typography component="h2" variant="display2" gutterBottom>
+                New Note
+              </Typography>
+            </div>
+            <AddEditNoteForm onSubmit={this.submit}/>
+          </div>
         )
       } else {
+        const note = this.props.notes;
         return (
-          <Typography component="h2" variant="display2" gutterBottom>
-            Edit Note
-          </Typography>
+          <div className="form-note">
+            <div className="title-form-note">
+              <Typography component="h2" variant="display2" gutterBottom>
+                Edit Note
+              </Typography>
+            </div>
+            <AddEditNoteForm onSubmit={this.submit} note={note}/>
+          </div>
         )
       }
     }
     
     return (
-      <div className="form-note">
-        <div className="title-form-note">
-        {renderTitle()}
-        </div>
-        <AddEditNoteForm onSubmit={this.submit} type={type} id={id}/>
+      <div>
+        {renderForm()}
       </div>
     )
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    notes: state.notes
+  }
+}
 
-export default AddEditNote
+export default connect(mapStateToProps)(AddEditNote);

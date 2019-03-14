@@ -20,19 +20,11 @@ const GetNotes = (req, res) => {
 }
 
 const GetNotesById = (req, res) => {
-    let type = req.query.type;
-    let items = req.query.id;
 
-    if(type === "array"){
-        let ids = req.query.id.split(',');
-        items = [];
-        items = ids.map(item=>{
-            return mongoose.Types.ObjectId(item)
-        })
-    }
+    let item = req.query.id;
 
     Note.
-        find({ '_id':{$in:items}}).
+        find({ '_id':{$in:item}}).
         exec((err,docs)=>{
             return res.status(200).send(docs)
     })

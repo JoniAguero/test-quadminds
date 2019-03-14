@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-    SET_NOTES, NEW_NOTE
+    SET_NOTES, NEW_NOTE, SET_NOTE_BY_ID, CLEAR_NOTE_DETAIL
 } from './types';
 
 import {
@@ -19,8 +19,28 @@ export function getNotes() {
 
 }
 
+export function getNoteById(id) {
+
+    const request = axios.get(`${NOTES_SERVER}/by_id?id=${id}`)
+        .then(response => {
+            return response.data
+        });
+
+    return {
+        type: SET_NOTE_BY_ID,
+        payload: request
+    }
+
+}
+
+export function clearNoteDetail() {
+    return {
+        type: CLEAR_NOTE_DETAIL,
+        payload: ''
+    }
+}
+
 export function newNote() {
-    console.log('action new note');
 
     const request = axios.post(`${NOTES_SERVER}/new`)
         .then(response => response.data);
