@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const AddEditNote = () => {
-    console.log(window.location.href);
-  return (
-    <div>
-      hola
-    </div>
-  )
+import AddEditNoteForm from '../utils/form';
+
+export class AddEditNote extends Component {
+
+  submit = values => {
+    console.log(values)
+  }
+
+  render() {
+    return (
+      <div className="form-note">
+        <AddEditNoteForm onSubmit={this.submit} />
+      </div>
+    )
+  }
 }
 
-export default AddEditNote;
+export default AddEditNote

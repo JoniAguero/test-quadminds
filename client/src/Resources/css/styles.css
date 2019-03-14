@@ -64,6 +64,15 @@ body {
   justify-content: center;
 }
 
+/* FORM NOTE */
+
+.form-note {
+  width: 80%;
+  margin-left: 10%;
+  height: auto;
+  padding-top: 100px;
+}
+
 /* FOOTER */
 
 .footer {

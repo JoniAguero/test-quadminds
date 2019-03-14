@@ -20,7 +20,7 @@ class Note extends Component {
         <Paper note={this.props.note}/>
       </div>
       <div className="container-note-buttons">
-        <Button type="edit"/> 
+        <Button type="edit" linkTo={`/notes/${this.props.note._id}`}/> 
         <Button type="delete" 
           runAction = {this.handleOpen('note-modal')}
           />

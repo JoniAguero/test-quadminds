@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import Fab from '@material-ui/core/Fab';
@@ -27,9 +28,11 @@ const Buttons = (props) => {
                         </IconButton>
         break;
         case "edit":
-            template = <IconButton className={classes.button} aria-label="delete">
-                            <Icon className="note-icon">edit</Icon>
-                        </IconButton>
+            template = <Link to={props.linkTo} className="link">
+                            <IconButton className={classes.button} aria-label="delete">
+                                <Icon className="note-icon">edit</Icon>
+                            </IconButton>
+                        </Link>
         break;
         case "new":
             template = <Link to={props.linkTo} className="link">
@@ -37,6 +40,11 @@ const Buttons = (props) => {
                                 <Icon>add</Icon>
                             </Fab>
                         </Link>
+        break;
+        case "submit":
+            template = <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                            Submit
+                        </Button>
         break;
         default:
             template='';
