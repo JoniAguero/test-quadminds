@@ -31,16 +31,11 @@ const GetNotesById = (req, res) => {
 }
 
 const UpdateNote= (req, res) => {
-    let item = req.query.id;
-    Note.findOneAndUpdate({
-            name: 'Note'
-        }, {
-            "$set": {
-                noteInfo: req.body
-            }
-        }, {
-            new: true
-        },
+
+    let id = req.query.id;
+    const noteUpdated = req.body;
+
+    Note.findByIdAndUpdate(id, noteUpdated,
         (err, doc) => {
             if (err) return res.json({
                 success: false,
@@ -48,14 +43,14 @@ const UpdateNote= (req, res) => {
             });
             return res.status(200).send({
                 success: true,
-                noteInfo: doc.noteInfo
+                note: doc
             })
         }
     )
 }
 
 const RemoveNote = (req, res) => {
-    console.log('remove');
+
     let item = req.query.id;
   
     Note.findByIdAndRemove(item,

@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import AddEditNoteForm from '../utils/form';
 import { connect } from 'react-redux';
 import { withSnackbar } from 'material-ui-snackbar-redux'
-import { getNoteById, clearNoteDetail, newNote } from '../../actions/notes_actions';
+import { getNoteById, clearNoteDetail, newNote, updateNoteById } from '../../actions/notes_actions';
 
 export class AddEditNote extends Component {
 
@@ -41,14 +41,24 @@ export class AddEditNote extends Component {
   }
 
   submit = values => {
-    console.log(values);
+
     if(this.state.type === 'new') {
-      this.props.dispatch(newNote(values)).then(res => {
+      this.props.dispatch(newNote(values)).then(() => {
         this.handleSnack();
         this.props.history.push("/");
       })
     } else {
-      console.log('edit');
+      const id = this.props.match.params.id;
+      this.props.dispatch(updateNoteById(id, values)).then(res => {
+        console.log(res);
+        if(res.payload.err) {
+          this.setState({
+            type: 'err'
+          })
+        }
+        this.handleSnack();
+        this.props.history.push("/");
+      })
     }
   }
 
@@ -56,9 +66,8 @@ export class AddEditNote extends Component {
     const { snackbar } = this.props;
     if (this.state.type === 'new') {
       return snackbar.show('Created note', 'Success', () => {/* do something... */})
-    }
-    return snackbar.show('Modified note', 'Success', () => {
-      /* do something... */ })
+    } else if (this.state.type === 'edit') return snackbar.show('Modified note', 'Success', () => {/* do something... */ })
+    return snackbar.show('Error', 'OPS!', () => {/* do something... */})
   }
 
   render() {

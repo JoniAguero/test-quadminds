@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-    SET_NOTES, NEW_NOTE, SET_NOTE_BY_ID, CLEAR_NOTE_DETAIL, REMOVE_NOTE_BY_ID
+    SET_NOTES, NEW_NOTE, SET_NOTE_BY_ID, CLEAR_NOTE_DETAIL, REMOVE_NOTE_BY_ID, UPDATE_NOTE_BY_ID
 } from './types';
 
 import {
@@ -28,6 +28,20 @@ export function getNoteById(id) {
 
     return {
         type: SET_NOTE_BY_ID,
+        payload: request
+    }
+
+}
+
+export function updateNoteById(id, datatoSubmit) {
+
+    const request = axios.put(`${NOTES_SERVER}/update?id=${id}`, datatoSubmit)
+        .then(response => {
+            return response.data
+        });
+
+    return {
+        type: UPDATE_NOTE_BY_ID,
         payload: request
     }
 
