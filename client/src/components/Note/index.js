@@ -9,7 +9,10 @@ import { show } from 'redux-modal'
 class Note extends Component {
 
   handleOpen = name => () => {
-    this.props.show(name, { message: `This is a ${name} modal` })
+    this.props.show(name, {
+      message: `Si me eliminas, no hay vuelta atrás :(`,
+      id: this.props.note._id
+    })
   };
 
   render() {
@@ -22,7 +25,9 @@ class Note extends Component {
       <div className="container-note-buttons">
         <Button type="edit" linkTo={`/notes/${this.props.note._id}`}/> 
         <Button type="delete" 
-          runAction = {this.handleOpen('note-modal')}
+          runAction = {
+            this.handleOpen('note-modal')
+          }
           />
       </div>
     </div>

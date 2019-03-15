@@ -34,7 +34,7 @@ class Notes extends Component {
         </div>
         <div className="container-notes">
           {
-            arrayNotes && arrayNotes.length > 0 ? this.showNotes(arrayNotes) : < div className = "main_loader" >
+            arrayNotes && arrayNotes.length >= 0 ? this.showNotes(arrayNotes) : <div className="main_loader">
                         <CircularProgress style={{color:'#2196F3'}} thickness={7}/> 
                     </div>}
         </div>
@@ -43,7 +43,7 @@ class Notes extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
     notes: state.notes

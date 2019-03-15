@@ -28,7 +28,7 @@ export default function(ComposedClass){
         }
     }
 
-    function mapStateToProps(state){
+    const mapStateToProps = (state) => {
         return {
             user: state.user
         }

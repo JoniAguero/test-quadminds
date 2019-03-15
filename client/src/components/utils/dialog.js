@@ -7,8 +7,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-
+import {
+  connect
+} from 'react-redux';
 import { connectModal } from 'redux-modal'
+import { removeNoteById } from '../../actions/notes_actions';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -21,10 +24,15 @@ class NoteDialog extends React.Component {
   };
 
   handleDelete = () => {
-    this.props.handleHide();
+    this.props.removeNoteById(this.props.id).then((res) => {
+      if(res.payload.success) this.props.handleHide();
+      return;
+    })
   };
 
   render() {
+    console.log(this.props);
+    
     const { show, handleHide, message } = this.props;
     
     return (
@@ -57,4 +65,12 @@ class NoteDialog extends React.Component {
   }
 }
 
-export default connectModal({ name: 'note-modal' })(NoteDialog)
+const mapDispatchToProps = dispatch => ({
+  removeNoteById: value => dispatch(removeNoteById(value))
+})
+
+NoteDialog = connect(null, mapDispatchToProps)(NoteDialog)
+
+export default connectModal({
+  name: 'note-modal'
+})(NoteDialog)
