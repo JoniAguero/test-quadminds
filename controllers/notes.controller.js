@@ -57,7 +57,7 @@ const UpdateNote= (req, res) => {
 const RemoveNote = (req, res) => {
     console.log('remove');
     let item = req.query.id;
-    console.log(item);    
+  
     Note.findByIdAndRemove(item,
         (err, doc) => {
             if (err) return res.json({
@@ -66,7 +66,7 @@ const RemoveNote = (req, res) => {
             });
             return res.status(200).send({
                 success: true,
-                noteInfo: doc.noteInfo
+                note: doc
             })
         }
     )

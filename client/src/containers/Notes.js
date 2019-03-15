@@ -22,6 +22,7 @@ class Notes extends Component {
 
   render() {
     const { notes } = this.props;
+    console.log(notes);
     const arrayNotes = notes.notes;
     
     return (

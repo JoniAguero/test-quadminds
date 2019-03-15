@@ -13,6 +13,9 @@ import {
 import { connectModal } from 'redux-modal'
 import { removeNoteById } from '../../actions/notes_actions';
 
+
+import { withSnackbar } from 'material-ui-snackbar-redux'
+
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
@@ -25,13 +28,20 @@ class NoteDialog extends React.Component {
 
   handleDelete = () => {
     this.props.removeNoteById(this.props.id).then((res) => {
-      if(res.payload.success) this.props.handleHide();
+      if(res.payload.success) {
+        this.handleSnack();
+        this.props.handleHide();
+      };
       return;
     })
   };
 
+  handleSnack = () => {
+    const {snackbar} = this.props;
+    snackbar.show('Deleted note', 'Success', () => {/* do something... */ })
+  }
+
   render() {
-    console.log(this.props);
     
     const { show, handleHide, message } = this.props;
     
@@ -69,6 +79,7 @@ const mapDispatchToProps = dispatch => ({
   removeNoteById: value => dispatch(removeNoteById(value))
 })
 
+NoteDialog = withSnackbar()(NoteDialog)
 NoteDialog = connect(null, mapDispatchToProps)(NoteDialog)
 
 export default connectModal({
