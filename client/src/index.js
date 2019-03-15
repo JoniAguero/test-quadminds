@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
+import { SnackbarProvider } from 'material-ui-snackbar-redux'
 import ReduxThunk from 'redux-thunk';
 
 import Reducer from './reducers';
@@ -22,9 +23,11 @@ const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk,
 
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(Reducer , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
-        <BrowserRouter>
-            <Routes />
-        </BrowserRouter>
+        <SnackbarProvider SnackbarProps={{ autoHideDuration: 3500 }}>
+            <BrowserRouter>
+                <Routes />
+            </BrowserRouter>
+        </SnackbarProvider>
     </Provider>
 
 , document.getElementById('root'));

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
 import AddEditNoteForm from '../utils/form';
 import { connect } from 'react-redux';
+import { withSnackbar } from 'material-ui-snackbar-redux'
 import { getNoteById, clearNoteDetail, newNote } from '../../actions/notes_actions';
 
 export class AddEditNote extends Component {
@@ -42,11 +43,22 @@ export class AddEditNote extends Component {
   submit = values => {
     console.log(values);
     if(this.state.type === 'new') {
-      this.props.dispatch(newNote(values))
-      this.props.history.push("/");
+      this.props.dispatch(newNote(values)).then(res => {
+        this.handleSnack();
+        this.props.history.push("/");
+      })
     } else {
       console.log('edit');
     }
+  }
+
+  handleSnack() {
+    const { snackbar } = this.props;
+    if (this.state.type === 'new') {
+      return snackbar.show('Created note', 'Success', () => {/* do something... */})
+    }
+    return snackbar.show('Modified note', 'Success', () => {
+      /* do something... */ })
   }
 
   render() {
@@ -92,4 +104,5 @@ const mapStateToProps = (state) => {
   }
 }
 
+AddEditNote = withSnackbar()(AddEditNote)
 export default connect(mapStateToProps)(AddEditNote);

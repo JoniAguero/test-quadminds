@@ -6,6 +6,7 @@
     "@material-ui/core": "^3.7.0",
     "axios": "0.18.0",
     "http-proxy-middleware": "^0.19.1",
+    "material-ui-snackbar-redux": "^0.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-moment": "0.7.7",
