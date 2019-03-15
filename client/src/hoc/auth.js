@@ -1,43 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { auth } from '../actions/user_actions';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { auth } from '../actions/user_actions';
 
-export default function(ComposedClass,reload,adminRoute = null){
-    class AuthenticationCheck extends Component {
-
-        _isMounted = false;
+export default function(ComposedClass){
+    class ExampleHOC extends Component {
 
         state = {
             loading: true
         }
 
-        componentDidMount(){
-            this._isMounted = true;
-            this.props.dispatch(auth()).then(() =>{
-                let user = this.props.user.userData;
-
-                if(!user.isAuth){
-                    if(reload){
-                        this.props.history.push('/register_login')
-                    }
-                } else{
-                    if(adminRoute && !user.isAdmin){
-                        this.props.history.push('/user/dashboard')
-                    } else{
-                        if(reload === false){
-                            this.props.history.push('/user/dashboard')
-                        }
-                    }
-                }
-                this.setState({loading:false})
-            })
+        componentDidMount = () => {
+            this.props.dispatch(auth()).then( () => this.setState({loading: false}) );
         }
-
-        componentWillUnmount() {
-            this._isMounted = false;
-        }
-
 
         render() {
             if(this.state.loading){
@@ -48,7 +23,7 @@ export default function(ComposedClass,reload,adminRoute = null){
                 )
             }
             return (
-               <ComposedClass {...this.props} user={this.props.user}/>
+               <ComposedClass {...this.props} />
             );
         }
     }
@@ -59,5 +34,5 @@ export default function(ComposedClass,reload,adminRoute = null){
         }
     }
 
-    return connect(mapStateToProps)(AuthenticationCheck)
+    return connect(mapStateToProps)(ExampleHOC)
 }

@@ -31,6 +31,7 @@ const GetNotesById = (req, res) => {
 }
 
 const UpdateNote= (req, res) => {
+    let item = req.query.id;
     Note.findOneAndUpdate({
             name: 'Note'
         }, {
@@ -53,9 +54,28 @@ const UpdateNote= (req, res) => {
     )
 }
 
+const RemoveNote = (req, res) => {
+    console.log('remove');
+    let item = req.query.id;
+    console.log(item);    
+    Note.findByIdAndRemove(item,
+        (err, doc) => {
+            if (err) return res.json({
+                success: false,
+                err
+            });
+            return res.status(200).send({
+                success: true,
+                noteInfo: doc.noteInfo
+            })
+        }
+    )
+}
+
 module.exports = {
     CreateNote,
     GetNotes,
     GetNotesById,
-    UpdateNote
+    UpdateNote,
+    RemoveNote
 }

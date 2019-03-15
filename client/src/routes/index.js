@@ -11,9 +11,9 @@ const Routes = () => {
   return(
     <Layout>
       <Switch>
-        <Route path="/notes/new" exact component={Auth(AddEditNote, null)}/>
-        <Route path="/notes/:id" exact component={Auth(AddEditNote, null)}/>
-        <Route path="/" exact component={Auth(Home, null)}/>
+        <Route path="/notes/new" exact component={Auth(AddEditNote)}/>
+        <Route path="/notes/:id" exact component={Auth(AddEditNote)}/>
+        <Route path="/" exact component={Auth(Home)}/>
       </Switch>
     </Layout>
 
