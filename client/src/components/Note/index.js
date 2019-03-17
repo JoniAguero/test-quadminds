@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { show } from 'redux-modal'
 
-class Note extends Component {
+export class Note extends Component {
 
   handleOpen = name => () => {
     this.props.show(name, {
