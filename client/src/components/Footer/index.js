@@ -1,10 +1,12 @@
 import React from 'react'
 
-const Footer = () => {
+const Footer = (props) => {
   return (
     <footer>
       <div className="footer">
-        Created by Joni Aguero
+      <p>
+        {props.title}
+      </p>
       </div>
     </footer>
   )

@@ -6,11 +6,11 @@ export class Layout extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <Header title={'Quadmins Test'}/>
             <div className="page_container">
                 {this.props.children}
             </div>
-        <Footer/>
+        <Footer title={'Created by Joni Aguero'}/>
       </div>
     )
   }
