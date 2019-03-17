@@ -6,7 +6,7 @@ import Note from '../components/Note';
 import Button from '../components/utils/button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-class Notes extends Component {
+export class Notes extends Component {
 
   componentDidMount = () => {
     this.props.dispatch(getNotes());
@@ -15,6 +15,7 @@ class Notes extends Component {
   showNotes = notes => (
     notes.map((note) =>
       <Note
+        className="note"
         note={note}
         key={note._id} />)
   )
@@ -26,7 +27,7 @@ class Notes extends Component {
     return (
       <div>
         <div className="title-notes">
-          <Typography component="h2" variant="display3" gutterBottom className="h3-notes">
+          <Typography component="h3" variant="display3" className="h3-notes">
             Listado de notas
           </Typography>
           <Button type="new" linkTo={`/notes/new`}></Button>
