@@ -1,11 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Paper from '../paper';
+import { Note, Classes } from '../tests/fixtures';
 
 describe('Paper', () => {
-    const paper = shallow(<Paper/>);
-    it('renders a Paper', () => {
-        console.log(paper.debug());
-    })
-    
+    const paper = mount(<Paper {...Note} {...Classes}/>);
+    it('renders a Paper title', () => {
+        expect(paper.find('h3').text()).toEqual(Note.note.title) 
+    });
+    it('renders a Paper content', () => {
+        expect(paper.find('p').text()).toEqual(Note.note.content)
+    });
 });
