@@ -15,9 +15,10 @@ export class Notes extends Component {
   showNotes = notes => (
     notes.map((note) =>
       <Note
+        key={note._id} 
         className="note"
-        note={note}
-        key={note._id} />)
+        note={note} />
+      )
   )
     
 

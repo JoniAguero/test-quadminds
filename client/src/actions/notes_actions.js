@@ -16,11 +16,16 @@ export function getNotes() {
         type: SET_NOTES,
         payload: request
     }
+}
 
+export function getNotesTest(notes) {
+    return {
+        type: SET_NOTES,
+        payload: notes
+    }
 }
 
 export function getNoteById(id) {
-
     const request = axios.get(`${NOTES_SERVER}/by_id?id=${id}`)
         .then(response => {
             return response.data
@@ -29,6 +34,14 @@ export function getNoteById(id) {
     return {
         type: SET_NOTE_BY_ID,
         payload: request
+    }
+}
+
+export function getNoteByIdTest(note) {
+
+    return {
+        type: SET_NOTE_BY_ID,
+        payload: note
     }
 
 }
