@@ -38,7 +38,6 @@
     "@babel/preset-env": "^7.3.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
-    "react-test-renderer": "^16.8.4",
-    "redux-logger": "^3.0.6"
+    "react-test-renderer": "^16.8.4"
   }
 }
