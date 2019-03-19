@@ -2,14 +2,14 @@ import React, {Component} from 'react'
 import { Field, reduxForm } from 'redux-form'
 import TextField from '@material-ui/core/TextField';
 import Button from '../utils/button';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
+import { getNoteById as getNote } from '../../actions/notes_actions';
 
 class AddEditNoteForm extends Component {
-  
+
   render() {
-  
     const { handleSubmit } = this.props
-  
     const renderTextField = ({
       input,
       label,
@@ -33,6 +33,7 @@ class AddEditNoteForm extends Component {
           <Field
             name="title"
             component={renderTextField}
+            value
             label="Title"
             type="text"
           />
@@ -41,8 +42,9 @@ class AddEditNoteForm extends Component {
           <Field
             name="content"
             component={renderTextField}
+            value
             label="Content"
-            type="text"
+            type="textarea"
             rows={5}
           />
         </div>
@@ -56,11 +58,16 @@ class AddEditNoteForm extends Component {
 
 AddEditNoteForm = connect(
   state => ({
-    initialValues: state.notes
-  })
+    initialValues: state.notes.notes
+  }),
+  { getNoteById: getNote }  
 )(AddEditNoteForm)
 
-export default AddEditNoteForm = reduxForm({
-  form: 'noteForm',
-  enableReinitialize: true
+AddEditNoteForm = reduxForm({
+  form: 'noteForm'
 })(AddEditNoteForm)
+
+
+
+export default AddEditNoteForm;
+

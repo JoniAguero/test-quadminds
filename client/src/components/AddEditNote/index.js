@@ -86,15 +86,15 @@ export class AddEditNote extends Component {
       if(this.state.type === 'new') {
         return (
           <div className="form-note">
-            {renderTitle('New Note')}
-            <AddEditNoteForm onSubmit={this.submit} />
+            {renderTitle(`New Note`)}
+            <AddEditNoteForm id={this.state.note._id} onSubmit={this.submit} />
           </div>
         )
       } else {
         return (
           <div className="form-note">
-            {renderTitle('Edit Note')}
-            <AddEditNoteForm onSubmit={this.submit} />
+            {renderTitle(`Edit Note : ${this.state.note.title}`)}
+            <AddEditNoteForm id={this.state.note._id} onSubmit={this.submit} />
           </div>
         )
       }
