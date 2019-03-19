@@ -17,4 +17,13 @@ export const notes = {
             title: 'test 2',
             content: 'test 2'
         }]
-} 
+}
+
+export const rootReducerTest = {
+    "form": {},
+    "modal": {},
+    "notes": {},
+    "snackbar": {
+    "queue": []
+    }
+}

@@ -2,7 +2,7 @@ import * as actions from './notes_actions';
 import * as types from './types';
 import { notes, note } from '../components/utils/tests/fixtures';
 
-describe('Note Actions', () => {
+describe('Notes Actions', () => {
 
     test('creates an action to set the notes', async () => {
         expect.assertions(1);
