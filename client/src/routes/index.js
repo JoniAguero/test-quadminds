@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Layout from '../Hoc/Layout';
+import Layout from '../hoc/layout';
 
 import Home from '../components/Home';
 import AddEditNote from '../components/AddEditNote';
