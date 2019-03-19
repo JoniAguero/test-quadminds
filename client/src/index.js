@@ -9,7 +9,6 @@ import Routes from './routes';
 import './setupProxy';
 
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import { SnackbarProvider } from 'material-ui-snackbar-redux'
@@ -17,8 +16,7 @@ import ReduxThunk from 'redux-thunk';
 
 import Reducer from './reducers';
 
-const logger = createLogger()
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk, logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
 
 ReactDOM.render(
