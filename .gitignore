@@ -5,6 +5,9 @@ client/.pnp
 client/.pnp.js
 
 # testing
+__tests__/report/*
+.nyc_output/
+.coverage
 client/coverage
 
 # production

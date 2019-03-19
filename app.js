@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const noteRoute = require('./routes/notes.route');
-const userRoute = require('./routes/users.route');
 
 const errorHandler = require('./_helpers/error-handler')
 const fatalErrorHandler = require('./_helpers/fatal-error-handler')
@@ -33,7 +32,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/api', [noteRoute, userRoute]);
+app.use('/api', [noteRoute]);
 
 app.use((err, req, res, next) => {
     debug(`Error: ${err.message}`)
